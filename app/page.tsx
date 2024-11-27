@@ -1,101 +1,183 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
+import { io } from 'socket.io-client'
+import OathModal from '@/components/OathModal'
+import SlideShow from '@/components/SlideShow'
+import NewsSection from '@/components/NewsSection'
+import QuoteSection from '@/components/QuoteSection'
+import OathSection from '@/components/OathSection'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { translations } from '@/utils/translations'
+
+export default function Dashboard() {
+  const { language, setLanguage } = useLanguage()
+  const [isOathModalOpen, setIsOathModalOpen] = useState(false)
+  const [oathCount, setOathCount] = useState<number | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [isYouTubeAccessible, setIsYouTubeAccessible] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLIFrameElement>(null)
+  const playerRef = useRef<any>(null)
+
+  const youtubeVideoUrl = "https://www.youtube.com/embed/ZAjd9Lh1-lA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=ZAjd9Lh1-lA";
+
+  useEffect(() => {
+    fetchOathCount()
+
+    // Initialize Socket.IO connection
+    const socket = io()
+
+    // Listen for new oaths
+    socket.on('newOath', (data) => {
+      console.log('New oath taken!', data)
+      setOathCount(data.count)
+      setIsOathModalOpen(true)
+    })
+
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
+
+  const fetchOathCount = async () => {
+    try {
+      const response = await axios.get('/api/oath-count');
+      setOathCount(response.data.count);
+    } catch (error) {
+      console.error('Error fetching count:', error);
+      setError('Failed to load oath count');
+    }
+  };
+
+  useEffect(() => {
+    // Load the YouTube IFrame API
+    const tag = document.createElement('script')
+    tag.src = "https://www.youtube.com/iframe_api"
+    const firstScriptTag = document.getElementsByTagName('script')[0]
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+    // Create a YouTube player instance
+    window.onYouTubeIframeAPIReady = () => {
+      if (videoRef.current) {
+        playerRef.current = new window.YT.Player(videoRef.current, {
+          events: {
+            'onReady': onPlayerReady,
+            'onError': onPlayerError,
+          },
+        })
+      }
+    }
+
+    return () => {
+      // Cleanup if necessary
+    }
+  }, [])
+
+  const onPlayerReady = (event: any) => {
+    // Player is ready
+  }
+
+  const onPlayerError = (event: any) => {
+    console.error("YouTube player error:", event)
+    setIsYouTubeAccessible(false)
+  }
+
+  const toggleMuteUnmute = () => {
+    if (playerRef.current) {
+      if (isMuted) {
+        playerRef.current.unMute()
+      } else {
+        playerRef.current.mute()
+      }
+      setIsMuted(!isMuted)
+    }
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen h-screen p-2 bg-gradient-to-br from-blue-50 to-cyan-100 overflow-hidden">
+      <h1 className="title-scale font-bold text-blue-800 mb-2 text-center font-cinzel tracking-wide">
+        {translations[language].titles.dashboard}
+      </h1>
+      <div className="grid grid-cols-3 grid-rows-5 gap-1 h-[calc(100vh-5rem)]">
+        {/* Employee of Month - Column 1, Rows 1-4 */}
+        <div className="col-start-1 col-end-2 row-start-1 row-end-5">
+          <div className="bg-white p-4 rounded-lg shadow-lg h-full border-2 border-blue-200 hover:border-blue-400 transition-all overflow-auto">
+            <SlideShow />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        {/* Video Section - Column 2, Rows 1-3 */}
+        <div className="col-start-2 col-end-4 row-start-1 row-end-4 h-full">
+          <div className="bg-white p-4 rounded-lg shadow-lg h-full border-2 border-blue-200">
+            <div className="relative w-full h-full rounded overflow-hidden">
+              {/* Check if a YouTube video URL is provided */}
+              {isYouTubeAccessible && youtubeVideoUrl ? (
+                <iframe
+                  ref={videoRef}
+                  className="absolute inset-0 w-full h-full rounded transform scale-150"
+                  src={youtubeVideoUrl}
+                  title="YouTube Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  onError={() => {
+                    console.error("YouTube video failed to load."); // Log error
+                    setIsYouTubeAccessible(false); // Set to false if URL is invalid
+                  }} 
+                />
+              ) : (
+                <video 
+                  className="absolute inset-0 w-full h-full object-cover rounded"
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="auto"
+                >
+                  <source 
+                    src="/assets/water-dept1.mp4" 
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              {/* Mute/Unmute Button */}
+              <button 
+                onClick={toggleMuteUnmute} 
+                className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-200 opacity-0 hover:opacity-100 transition-opacity"
+                aria-label={isMuted ? "Unmute" : "Mute"}
+              >
+                {isMuted ? '🔇' : '🔊'}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* News Section - Column 2, Rows 4-5 */}
+        <div className="col-start-3 col-end-3 row-start-4 row-end-6">
+          <NewsSection />
+        </div>
+
+        {/* Quote Section - Column 3, Row 4 */}
+        <div className="col-start-1 col-end-1 row-start-5 row-end-5">
+          <QuoteSection />
+        </div>
+
+        {/* Picture Section - Column 3, Row 5 */}
+        <div className="col-start-2 col-end-2 row-start-4 row-end-6">
+          <OathSection oathCount={oathCount} />
+        </div>
+      </div>
+
+      <OathModal 
+        isOpen={isOathModalOpen}
+        onClose={() => setIsOathModalOpen(false)}
+        onOathTaken={() => {}} // No action needed here
+        oathCount={oathCount}
+      />
+    </main>
+  )
 }
+
+

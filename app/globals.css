@@ -5,6 +5,52 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-scale: 1rem;
+  --title-scale: 2rem;
+  --subtitle-scale: 1.5rem;
+  --small-scale: 1rem;
+  --semisub-scale: 1.2rem;
+  --count-scale: 1rem;
+  --oath-scale: 1.0rem;
+}
+
+/* For larger screens (1440px and above) */
+@media (min-width: 1440px) {
+  :root {
+    --font-scale: 1rem;
+    --title-scale: 2rem;
+    --subtitle-scale: 1.5rem;
+    --small-scale: 1rem;
+    --semisub-scale: 1.4rem;
+    --count-scale: 1.2rem;
+    --oath-scale: 1.3rem;
+  }
+}
+
+/* For laptop and smaller screens (up to 1440px) */
+@media (max-width: 1440px) {
+  :root {
+    --font-scale: 0.9rem;
+    --title-scale: 1.8rem;
+    --subtitle-scale: 1.2rem;
+    --small-scale: 0.9rem;
+    --semisub-scale: 1.2rem;
+    --count-scale: 1rem;
+    --oath-scale: 0.83rem;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  :root {
+    --font-scale: 0.8rem;
+    --title-scale: 1.5rem;
+    --subtitle-scale: 1rem;
+    --small-scale: 0.8rem;
+    --semisub-scale: 1.2rem;
+    --count-scale: 1.5rem;
+    --oath-scale: 1.2rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,5 +63,66 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans Kannada', Arial, Helvetica, sans-serif;
+}
+body.kannada{
+  font-family: 'Noto Sans Kannada';
+}
+
+.text-scale {
+  font-size: var(--font-scale);
+}
+.title-scale {
+  font-size: var(--title-scale);
+}
+.subtitle-scale {
+  font-size: var(--subtitle-scale);
+}
+.small-scale {
+  font-size: var(--small-scale);
+}
+.count-scale {
+  font-size: var(--count-scale);
+}
+.oath-scale {
+  font-size: var(--oath-scale);
+}
+
+/* Vintage background style */
+.bg-vintage {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Custom Scrollbar Styles */
+.scrollable-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.scrollable-container::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent; /* Make the track transparent */
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5); /* Semi-transparent color for the thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(136, 136, 136, 0.8); /* Darker on hover */
+}
+
+/* For Firefox */
+.scrollable-container {
+  scrollbar-width: thin; /* Make the scrollbar thin */
+  scrollbar-color: rgba(136, 136, 136, 0.5) transparent; /* Thumb color and track color */
 }

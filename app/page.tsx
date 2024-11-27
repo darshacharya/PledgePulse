@@ -11,6 +11,15 @@ import OathSection from '@/components/OathSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/utils/translations'
 
+declare global {
+  interface Window {
+      onYouTubeIframeAPIReady: () => void;
+      YT: {
+          Player: new (element: HTMLIFrameElement, options: any) => any;
+      };
+  }
+}
+
 export default function Dashboard() {
   const { language, setLanguage } = useLanguage()
   const [isOathModalOpen, setIsOathModalOpen] = useState(false)

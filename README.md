@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,3 +35,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+=======
+# PledgePulse
+A real-time office oath tracking system combining ESP8266 hardware and Next.js/MongoDB web technologies. Employees press a button to trigger an oath count update visible on a dashboard. The system also displays motivational quotes, Employee of the Month, events, videos, and an image slideshow.
+>>>>>>> f4cc218d8a14a057e16920cd7dc42fcb6cf7cd96

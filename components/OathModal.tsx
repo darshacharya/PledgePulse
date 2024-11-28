@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface OathModalProps {
@@ -8,9 +8,8 @@ interface OathModalProps {
   oathCount: number | null
 }
 
-export default function OathModal({ isOpen, onClose, onOathTaken, oathCount }: OathModalProps) {
+export default function OathModal({ isOpen, onClose }: OathModalProps) {
   const { language } = useLanguage()
-  const [showThankYou, setShowThankYou] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const content = {
@@ -30,18 +29,13 @@ export default function OathModal({ isOpen, onClose, onOathTaken, oathCount }: O
           .catch(e => console.log('Audio playback failed:', e))
       }
 
-      // Show thank you message
-      setShowThankYou(true)
-
       // Close after 5 seconds
       const thankYouTimer = setTimeout(() => {
-        setShowThankYou(false)
         onClose() // Close the modal after showing the thank you message
       }, 5000) // Show for 5 seconds
 
       return () => {
         clearTimeout(thankYouTimer)
-        setShowThankYou(false)
       }
     }
   }, [isOpen, onClose])

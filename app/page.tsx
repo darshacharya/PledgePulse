@@ -11,26 +11,51 @@ import OathSection from '@/components/OathSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/utils/translations'
 
+// Define the YT namespace
 declare global {
-  interface Window {
-      onYouTubeIframeAPIReady: () => void;
-      YT: {
-          Player: new (element: HTMLIFrameElement, options: any) => any;
+  interface YT {
+    Player: {
+      new (element: HTMLIFrameElement, options: YT.PlayerOptions): YT.Player;
+      playVideo(): void;
+      pauseVideo(): void;
+      mute(): void;
+      unMute(): void;
+      // Add other methods as needed
+    };
+    PlayerOptions: {
+      height?: string;
+      width?: string;
+      videoId: string;
+      events?: {
+        onReady?: (event: YT.PlayerEvent) => void;
+        onError?: (event: YT.ErrorEvent) => void;
       };
+    };
+    PlayerEvent: {
+      target: YT.Player;
+    };
+    ErrorEvent: {
+      data: number; // Error code
+    };
+  }
+
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+    YT: YT; // Reference the YT namespace directly
   }
 }
 
 export default function Dashboard() {
-  const { language, setLanguage } = useLanguage()
+  const { language } = useLanguage()
   const [isOathModalOpen, setIsOathModalOpen] = useState(false)
   const [oathCount, setOathCount] = useState<number | null>(null)
-  const [error, setError] = useState<string | null>(null)
   const [isYouTubeAccessible, setIsYouTubeAccessible] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLIFrameElement>(null)
-  const playerRef = useRef<any>(null)
+  const playerRef = useRef<YT.Player | null>(null)
 
   const youtubeVideoUrl = "https://www.youtube.com/embed/ZAjd9Lh1-lA?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=ZAjd9Lh1-lA";
+  const videoId = "ZAjd9Lh1-lA";
 
   useEffect(() => {
     fetchOathCount()
@@ -56,7 +81,6 @@ export default function Dashboard() {
       setOathCount(response.data.count);
     } catch (error) {
       console.error('Error fetching count:', error);
-      setError('Failed to load oath count');
     }
   };
 
@@ -71,6 +95,7 @@ export default function Dashboard() {
     window.onYouTubeIframeAPIReady = () => {
       if (videoRef.current) {
         playerRef.current = new window.YT.Player(videoRef.current, {
+          videoId: videoId,
           events: {
             'onReady': onPlayerReady,
             'onError': onPlayerError,
@@ -84,11 +109,11 @@ export default function Dashboard() {
     }
   }, [])
 
-  const onPlayerReady = (event: any) => {
+  const onPlayerReady = () => {
     // Player is ready
   }
 
-  const onPlayerError = (event: any) => {
+  const onPlayerError = (event: YT.ErrorEvent) => {
     console.error("YouTube player error:", event)
     setIsYouTubeAccessible(false)
   }

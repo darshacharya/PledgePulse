@@ -1,6 +1,5 @@
 'use client'
 
-import { Calendar } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/utils/translations'
 
@@ -22,7 +21,7 @@ export default function OathSection({ oathCount }: OathSectionProps) {
         </h2>
       </div>
       <p className="text-white oath-scale font-thinbold italic font-poppins mt-1 text-center">
-        "{oathDescription}"
+        {oathDescription}
       </p>
       <hr />
       <div className="text-center mt-2 mb-4">

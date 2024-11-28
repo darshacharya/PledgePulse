@@ -45,7 +45,7 @@ export default function QuoteSection() {
       <div className="mt-1 flex-grow flex items-center overflow-hidden">
         <div className="border-l-4 border-white pl-2 py-1 text-left flex-grow">
           <p className="text-white italic small-scale font-poppins leading-relaxed font-bold text-xl break-words overflow-hidden">
-            "{currentQuote.text}"
+            {currentQuote.text}
           </p>
           <p className="text-white text-sm mt-1 font-poppins font-bold small-scale">
             - {currentQuote.author}

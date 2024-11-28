@@ -20,20 +20,31 @@ export async function GET() {
     console.log('Count retrieved:', count)  // Debug log
 
     return NextResponse.json({ count })
-  } catch (error: any) {
-    console.error('Server Error:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    })
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('Server Error:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      })
 
-    return NextResponse.json(
-      {
-        error: 'Failed to fetch oath count',
-        details: error.message,
-        type: error.name
-      },
-      { status: 500 }
-    )
+      return NextResponse.json(
+        {
+          error: 'Failed to fetch oath count',
+          details: error.message,
+          type: error.name
+        },
+        { status: 500 }
+      )
+    } else {
+      console.error('Unexpected error:', error)
+      return NextResponse.json(
+        {
+          error: 'Failed to fetch oath count',
+          details: 'An unexpected error occurred'
+        },
+        { status: 500 }
+      )
+    }
   }
 }

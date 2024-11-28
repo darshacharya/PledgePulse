@@ -14,6 +14,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
+    console.error('Error in POST:', error);
     return NextResponse.json(
       { error: 'Failed to record Arduino data' },
       { status: 500 }
@@ -33,6 +34,7 @@ export async function GET() {
 
     return NextResponse.json(data[0] || {})
   } catch (error) {
+    console.error('Error in GET:', error);
     return NextResponse.json(
       { error: 'Failed to fetch Arduino data' },
       { status: 500 }

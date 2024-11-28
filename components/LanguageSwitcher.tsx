@@ -12,12 +12,12 @@ export default function LanguageSwitcher() {
   };
 
   useEffect(() => {
-    // Set interval to switch language every 1 minute (60000 milliseconds)
+    // Set interval to switch language every 2 minutes (120000 milliseconds)
     const languageSwitchInterval = setInterval(toggleLanguage, 120000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(languageSwitchInterval);
-  }, [language, setLanguage]);
+  }, [language]);
 
   return (
     <button

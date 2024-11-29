@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-// Extend the Window interface to include the io variable
+// Define the global io variable if needed
 declare global {
-  interface Window {
-    io?: {
-      emit: (event: string, data: { count: number }) => void; // Specify a more specific type for data
-    };
+  namespace NodeJS {
+    interface Global {
+      io?: {
+        emit: (event: string, data: { count: number }) => void;
+      };
+    }
   }
 }
 
@@ -22,8 +24,8 @@ export async function POST() {
     const count = await db.collection('oaths').countDocuments(); // Use const for count
 
     // Emit the event to all connected clients
-    if (window.io) {
-      window.io.emit('newOath', { count }); // Emit with specific data type
+    if (global.io) {
+      global.io.emit('newOath', { count }); // Emit with specific data type
     }
 
     return NextResponse.json({ success: true, count });

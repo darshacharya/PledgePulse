@@ -72,14 +72,14 @@ export default function NewsSection() {
             {visibleNews.map((item) => (
               <div key={item.id} className="border-b border-gray-200 pb-2 last:border-0">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
-                  <h3 className="font-semibold text-gray-800 font-poppins text-lg flex-grow">
+                  <h3 className="font-semibold text-gray-800 font-poppins text-sm flex-grow">
                     {item.title}
                   </h3>
                   <p className="text-gray-500 text-xs whitespace-nowrap font-poppins">
                     {new Date(item.date).toLocaleDateString(language === 'en' ? 'en-US' : 'kn-IN')}
                   </p>
                 </div>
-                <p className="text-gray-600 text-lg font-poppins mt-0.5">
+                <p className="text-gray-600 text-sm font-poppins mt-0.5">
                   {item.description}
                 </p>
               </div>

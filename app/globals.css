@@ -24,6 +24,7 @@
     --semisub-scale: 1.4rem;
     --count-scale: 1.2rem;
     --oath-scale: 1.3rem;
+ 
   }
 }
 
@@ -37,6 +38,7 @@
     --semisub-scale: 1.2rem;
     --count-scale: 1rem;
     --oath-scale: 0.83rem;
+
   }
 }
 
@@ -48,8 +50,8 @@
     --subtitle-scale: 1rem;
     --small-scale: 0.8rem;
     --semisub-scale: 1.2rem;
-    --count-scale: 1.5rem;
-    --oath-scale: 1.2rem;
+    --count-scale: 0.875rem;
+    --oath-scale: 0.83rem;
   }
 }
 

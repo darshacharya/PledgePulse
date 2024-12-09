@@ -2,56 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-scale: 1rem;
-  --title-scale: 2rem;
-  --subtitle-scale: 1.5rem;
-  --small-scale: 1rem;
-  --semisub-scale: 1.2rem;
-  --count-scale: 1rem;
-  --oath-scale: 1.0rem;
-}
-
 /* For larger screens (1440px and above) */
 @media (min-width: 1440px) {
   :root {
-    --font-scale: 1rem;
-    --title-scale: 2rem;
-    --subtitle-scale: 1.5rem;
+    --font-scale: 1.2rem; /* Increased base font size */
+    --title-scale: 2.2rem; /* Slightly larger title size */
+    --subtitle-scale: 1.8rem; /* Slightly larger subtitle size */
     --small-scale: 1rem;
-    --semisub-scale: 1.4rem;
+    --semisub-scale: 1.4rem; /* Increased size for semi-subtitle */
     --count-scale: 1.2rem;
     --oath-scale: 1.3rem;
- 
+    --news-scale: 1.1rem;
   }
 }
 
-/* For laptop and smaller screens (up to 1440px) */
+/* For smaller screens up to 1440px (laptops and below) */
 @media (max-width: 1440px) {
   :root {
-    --font-scale: 0.9rem;
-    --title-scale: 1.8rem;
-    --subtitle-scale: 1.2rem;
-    --small-scale: 0.9rem;
-    --semisub-scale: 1.2rem;
+    --font-scale: 1rem; /* Default size for laptop */
+    --title-scale: 2rem; /* Title font size for laptops */
+    --subtitle-scale: 1.5rem;
+    --small-scale: 1rem;
+    --semisub-scale: 1.3rem;
     --count-scale: 1rem;
-    --oath-scale: 0.83rem;
-
+    --oath-scale: 1rem;
+    --news-scale: 0.75rem;
   }
 }
 
-/* For mobile screens */
+/* For mobile screens (up to 768px) */
 @media (max-width: 768px) {
   :root {
-    --font-scale: 0.8rem;
-    --title-scale: 1.5rem;
-    --subtitle-scale: 1rem;
-    --small-scale: 0.8rem;
-    --semisub-scale: 1.2rem;
-    --count-scale: 0.875rem;
-    --oath-scale: 0.83rem;
+    --font-scale: 0.9rem; /* Smaller font for mobile */
+    --title-scale: 1.8rem; /* Slightly smaller title for mobile */
+    --subtitle-scale: 1.3rem;
+    --small-scale: 0.9rem;
+    --semisub-scale: 1rem;
+    --count-scale: 0.9rem;
+    --oath-scale: 0.9rem;
+    --news-scale: 1.2rem;
   }
 }
 
@@ -61,6 +50,7 @@
     --foreground: #ededed;
   }
 }
+
 
 body {
   color: var(--foreground);
@@ -88,6 +78,9 @@ body.kannada{
 }
 .oath-scale {
   font-size: var(--oath-scale);
+}
+.news-scale{
+  font-size: var(--news-scale);
 }
 
 /* Vintage background style */

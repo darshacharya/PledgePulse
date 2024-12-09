@@ -130,21 +130,21 @@ export default function Dashboard() {
   }
 
   return (
-    <main className="min-h-screen h-screen p-2 bg-gradient-to-br from-blue-50 to-cyan-100 overflow-hidden">
+    <main className="min-h-screen h-screen p-1 bg-gradient-to-br from-blue-50 to-cyan-100 overflow-hidden">
       <h1 className="title-scale font-bold text-blue-800 mb-2 text-center font-cinzel tracking-wide">
         {translations[language].titles.dashboard}
       </h1>
       <div className="grid grid-cols-3 grid-rows-5 gap-1 h-[calc(100vh-5rem)]">
         {/* Employee of Month - Column 1, Rows 1-4 */}
         <div className="col-start-1 col-end-2 row-start-1 row-end-5">
-          <div className="bg-white p-4 rounded-lg shadow-lg h-full border-2 border-blue-200 hover:border-blue-400 transition-all overflow-auto">
+          <div className="bg-white p-2 rounded-lg shadow-lg h-full border-2 border-blue-200 hover:border-blue-400 transition-all overflow-auto">
             <SlideShow />
           </div>
         </div>
 
         {/* Video Section - Column 2, Rows 1-3 */}
         <div className="col-start-2 col-end-4 row-start-1 row-end-4 h-full">
-          <div className="bg-white p-4 rounded-lg shadow-lg h-full border-2 border-blue-200">
+          <div className="bg-white p-2 rounded-lg shadow-lg h-full border-2 border-blue-200">
             <div className="relative w-full h-full rounded overflow-hidden">
               {/* Check if a YouTube video URL is provided */}
               {isYouTubeAccessible && youtubeVideoUrl ? (

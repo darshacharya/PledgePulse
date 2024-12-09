@@ -38,7 +38,7 @@ export default function QuoteSection() {
     <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-2 rounded-lg shadow-lg h-full border-2 border-white-200 hover:border-white-400 transition-all flex flex-col">
       <div className="flex items-center gap-1 mb-2">
         <Quote className="w-4 h-4 text-white" />
-        <h2 className="subtitle-scale font-semibold text-white font-poppins border-b-2 border-white pb-1">
+        <h2 className="subtitle-scale font-bold text-white font-poppins border-b-2 border-white pb-1">
           {translations[language].titles.quotes}
         </h2>
       </div>

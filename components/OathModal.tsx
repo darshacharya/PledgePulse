@@ -32,7 +32,7 @@ export default function OathModal({ isOpen, onClose }: OathModalProps) {
       // Close after 5 seconds
       const thankYouTimer = setTimeout(() => {
         onClose() // Close the modal after showing the thank you message
-      }, 5000) // Show for 5 seconds
+      }, 3000) // Show for 3 seconds
 
       return () => {
         clearTimeout(thankYouTimer)

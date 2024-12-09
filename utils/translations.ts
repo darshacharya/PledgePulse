@@ -6,22 +6,22 @@ export const translations = {
         quotes: 'Quotes',
         oathCount: 'Oath',
         peopleTakenOath: 'Number of people taken oath',
-        oathDescription: 'I vow to protect and conserve water. I will avoid wasting, polluting, or using water needlessly. I will use water efficiently and contribute to the preservation of the environment. Every day, I commit to taking action to save water.',
+        oathDescription: '"I vow to protect and conserve water. I will avoid wasting, polluting, or using water needlessly. I will use water efficiently and contribute to the preservation of the environment. Every day, I commit to taking action to save water."',
         month: 'Month',
         designation: 'Designation',
         department: 'Department',
       },
       quotes: [
         {
-          text: "Water is the driving force of all nature.",
+          text: '"Water is the driving force of all nature."',
           author: "Leonardo da Vinci"
         },
         {
-          text: "Thousands have lived without love, not one without water.",
+          text: '"Thousands have lived without love, not one without water."',
           author: "W. H. Auden"
         },
         {
-          text: "When the well is dry, we know the worth of water.",
+          text: '"When the well is dry, we know the worth of water."',
           author: "Benjamin Franklin"
         }
       ],
@@ -53,22 +53,22 @@ export const translations = {
         quotes: 'ಸುಭಾಷಿತಗಳು',
         oathCount: 'ಪ್ರಮಾಣ ವಚನ',
         peopleTakenOath: 'ಪ್ರಮಾಣ ವಚನ ಸ್ವೀಕರಿಸಿದವರ ಸಂಖ್ಯೆ',
-        oathDescription: 'ನಾನು ನೀರನ್ನು ಸಂರಕ್ಷಿಸುವ ಪ್ರತಿಜ್ಞೆ ಮಾಡುತ್ತೇನೆ. ನಾನು ನೀರನ್ನು ಅನಗತ್ಯವಾಗಿ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ, ಕಲುಷಿತಗೊಳಿಸುವುದಿಲ್ಲ ಅಥವಾ ಬಳಸುವುದಿಲ್ಲ. ನಾನು ನೀರನ್ನು ಬುದ್ಧಿವಂತಿಕೆಯಿಂದ ಬಳಸುತ್ತೇನೆ ಮತ್ತು ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸುವ ನಿಟ್ಟಿನಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತೇನೆ. ನೀರನ್ನು ಉಳಿಸಲು ಪ್ರತಿದಿನ ಪ್ರಯತ್ನ ಮಾಡಲು ನಾನು ಬದ್ಧನಾಗಿದ್ದೇನೆ.',
+        oathDescription: '"ನಾನು ನೀರನ್ನು ಸಂರಕ್ಷಿಸುವ ಪ್ರತಿಜ್ಞೆ ಮಾಡುತ್ತೇನೆ. ನಾನು ನೀರನ್ನು ಅನಗತ್ಯವಾಗಿ ವ್ಯರ್ಥ ಮಾಡುವುದಿಲ್ಲ, ಕಲುಷಿತಗೊಳಿಸುವುದಿಲ್ಲ ಅಥವಾ ಬಳಸುವುದಿಲ್ಲ. ನಾನು ನೀರನ್ನು ಬುದ್ಧಿವಂತಿಕೆಯಿಂದ ಬಳಸುತ್ತೇನೆ ಮತ್ತು ಪರಿಸರವನ್ನು ಸಂರಕ್ಷಿಸುವ ನಿಟ್ಟಿನಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತೇನೆ. ನೀರನ್ನು ಉಳಿಸಲು ಪ್ರತಿದಿನ ಪ್ರಯತ್ನ ಮಾಡಲು ನಾನು ಬದ್ಧನಾಗಿದ್ದೇನೆ."',
         month: 'ಮಾಸ',
         designation: 'ಪದವಿ',
         department: 'ವಿಭಾಗ',
       },
       quotes: [
         {
-          text: "ನೀರು ಜೀವನ, ನೀರೇ ಮೂಲ, ನೀರೇ ಸರ್ವಸ್ವ.",
+          text: '"ನೀರು ಜೀವನ, ನೀರೇ ಮೂಲ, ನೀರೇ ಸರ್ವಸ್ವ."',
           author: "ಕುವೆಂಪು"
         },
         {
-          text: "ನೀರಿನ ಹನಿಯಲ್ಲಿ ಜೀವನದ ಮೌಲ್ಯವಿದೆ.",
+          text: '"ನೀರಿನ ಹನಿಯಲ್ಲಿ ಜೀವನದ ಮೌಲ್ಯವಿದೆ."',
           author: "ದ.ರಾ. ಬೇಂದ್ರೆ"
         },
         {
-          text: "ನೀರು ಉಳಿಸಿದರೆ ನಾಳೆ ಬದುಕು ಉಳಿಯುತ್ತದೆ.",
+          text: '"ನೀರು ಉಳಿಸಿದರೆ ನಾಳೆ ಬದುಕು ಉಳಿಯುತ್ತದೆ."',
           author: "ಶಿವರಾಮ ಕಾರಂತ"
         }
       ],

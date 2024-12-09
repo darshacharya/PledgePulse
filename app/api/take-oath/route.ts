@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 
-// Define the global io variable if needed
+// Extend the global object to declare io with the correct type
 declare global {
   namespace NodeJS {
     interface Global {
@@ -14,25 +14,31 @@ declare global {
 
 export async function POST() {
   try {
-    const client = await clientPromise; // Use const for client
-    const db = client.db('office-dashboard'); // Use const for db
+    // Use const for client and db
+    const client = await clientPromise;
+    const db = client.db('office-dashboard');
 
+    // Insert a new oath record
     await db.collection('oaths').insertOne({
-      timestamp: new Date()
+      timestamp: new Date(),
     });
 
-    const count = await db.collection('oaths').countDocuments(); // Use const for count
+    // Get the count of oaths
+    const count = await db.collection('oaths').countDocuments();
 
-    // Emit the event to all connected clients
-    if (global.io) {
-      global.io.emit('newOath', { count }); // Emit with specific data type
+    // Emit event if global.io exists
+    if ((globalThis as any).io) {
+      (globalThis as any).io.emit('newOath', { count });
     }
+    
 
     return NextResponse.json({ success: true, count });
   } catch (error) {
     console.error('Oath error:', error);
+
+    // Improved error response with details for debugging
     return NextResponse.json(
-      { error: 'Failed to record oath' },
+      { error: 'Failed to record oath', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
